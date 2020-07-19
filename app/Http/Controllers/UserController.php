@@ -16,6 +16,11 @@ class UserController extends Controller
         $users=User::all();
         return view('users.index',['users'=>$users]);
     }
+    public function show($id)
+    {   
+        $user=User::find($id);
+        return view('users.show', compact('user'));
+    }
     public function edit(USer $user)
     {
         return view('users.edit', compact('user'));
@@ -35,16 +40,21 @@ class UserController extends Controller
             $user->password = Hash::make($request['password']);
             $user->save();
 
-        return redirect('home/userList') ;
-
-
-    
+        return redirect('users') ;
     }
-
-    public function edit(USer $user)
+    public function update(Request $request, $id)
     {
-        return view('users.edit', compact('user'));
+        $user = User::find($id);
+        $user->name =$request->name;
+        $user->last_name =$request->last_name;
+        $user->email =$request->email;
+        $user->estado = (!request()->has('estado') == '1' ? '0' : '1');
+        $user->save();
+
+        return redirect('users') ;
     }
+
+   
 
 
 }
