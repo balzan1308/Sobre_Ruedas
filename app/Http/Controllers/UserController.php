@@ -9,7 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
+
 {
+        
+    public function __construct()
+    {
+      $this->middleware('verified');
+      $this->middleware('active');
+    }
+    
+
    
     public function index()
     {
@@ -48,7 +57,7 @@ class UserController extends Controller
         $user->name =$request->name;
         $user->last_name =$request->last_name;
         $user->email =$request->email;
-        $user->estado = (!request()->has('estado') == '1' ? '0' : '1');
+        $user->active = (!request()->has('active') == '1' ? '0' : '1');
         $user->save();
 
         return redirect('users') ;
