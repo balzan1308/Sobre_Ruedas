@@ -224,6 +224,23 @@
                                     </li>
                                    
                                 </ul>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        
+                                     <li class="nav-item">
+                                         <a href="{{url ('product')}}"
+                                                class="{{ Request::path() === 'products' ? 'nav-link active' : 'nav-link' }}">
+                                                <img src="https://img.icons8.com/material-outlined/24/000000/product.png"/>
+                                             <p>
+                                                 Products
+                                                 <?php use App\Product; $products_count = product::all()->count(); ?>
+                                                 <span class="right badge badge-danger">{{ $products_count ?? '0' }}</span>
+                                             </p>
+                                        </a>
+                                     </li>
+                                    </li>
+                                   
+                                </ul>
                                 
                             
                             
