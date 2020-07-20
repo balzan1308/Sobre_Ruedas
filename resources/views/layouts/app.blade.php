@@ -241,11 +241,32 @@
                                     </li>
                                    
                                 </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <img src="https://img.icons8.com/ios/50/000000/dirt-bike.png"/>
+                                    <p>Products<i class="fas fa-angle-left right"></i></p>
+                                </a>
                                 
-                            
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        
+                                     <li class="nav-item">
+                                         <a href="{{route ('products/indexClient')}}"
+                                                class="{{ Request::path() === 'product' ? 'nav-link active' : 'nav-link' }}">
+                                                <img src="https://img.icons8.com/material-outlined/24/000000/product.png"/>
+                                             <p> All Products</p>
+                                             
+                                        </a>
+                                     </li>
+                                    </li>
+                                   
+                                </ul>
+                            </li>
                             
 
                         </ul>
+                        
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>
