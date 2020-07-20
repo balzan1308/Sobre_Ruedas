@@ -51,9 +51,9 @@ class ProductController extends Controller
       * @param  \Illuminate\Http\Request  $request
       * @return \Illuminate\Http\Response
       */
-      public function store (Request $request)
+    public function store (Request $request)
       {
-          if($request->hasFile('image')){
+         if($request->hasFile('image')){
               $file = $request->file('image');
               $name = time().$file->getClientOriginalName();
               $file->move(public_path().'/images', $name);
@@ -69,4 +69,45 @@ class ProductController extends Controller
           return redirect('/product');
   
       }
+      /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Product $product)
+    {
+        $category = Category::all();
+        return view('products.edit',compact('product'),compact('category'));
+    }
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update(request $request, $id)
+    {
+
+        $products = Product::find($id);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = time().$file->getClientOriginalName();
+            $file->move(public_path().'/images', $name);
+            $products->image = $name;
+        }
+
+        $products->name = $request->input('name');
+        $products->price = $request->input('price');
+        $products->stock = $request->input('stock');
+        $products->description = $request->input('description');
+        $products->category_id = $request->input('category_id');
+        $products->active = (!request()->has('active') == '1' ? '0' : '1');
+        $products->save();
+        return redirect(route('product.index')) ;
+    }
+
 }
+
