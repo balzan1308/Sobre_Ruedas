@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 
+
 class ProductController extends Controller
 {
     /**
@@ -17,23 +18,14 @@ class ProductController extends Controller
     {
         if ($request) {
             $query = trim($request->get('search'));
-
+            
             $products = Product::where('name', 'LIKE', '%' . $query . '%')
                     ->orderBy('id', 'asc')
-                    ->paginate(6);
-        return view('products.index', ['products' => $products, 'search' => $query]);
-      
+                    ->paginate(2);
+            return view('products.index', ['products' => $products, 'search' => $query], compact('product'));
         }
-
-        $products = Product::select('id', 'name', 'price', 'stock', 'image', 'url')->with('image:name')->get();
-
-            //$ib = Articulos::find(3)->imagenesarticulos;
-    
-            //dd($ib);
-    
-            // $imagenes = Articulos::find(3)->imagenesaerticulos;
-    
-        return view('products.index', compact('articulos')); 
+     
+        return view('products.index', compact('product'));
     }
     /**
      * Show the form for creating a new resource.
@@ -51,13 +43,14 @@ class ProductController extends Controller
       * @param  \Illuminate\Http\Request  $request
       * @return \Illuminate\Http\Response
       */
-    public function store (Request $request)
-      {
-         if($request->hasFile('image')){
+    public function store(Request $request)
+    {
+        if ($request->hasFile('image') )
+        {
               $file = $request->file('image');
               $name = time().$file->getClientOriginalName();
               $file->move(public_path().'/images', $name);
-          }
+        }
           $product = new product();
           $product->name = request('name');
           $product->category_id = $request->input('category_id');
@@ -67,8 +60,7 @@ class ProductController extends Controller
           $product->image = $name;
           $product->save();
           return redirect('/product');
-  
-      }
+    }
       /**
      * Display the specified resource.
      *
@@ -77,11 +69,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        $category =Category::find($id);
         $product=Product::find($id);
-        return view('products.show', compact('product'));
-      
-
-    }   
+        return view('products.show', compact('product'), compact('category'));
+    }
       /**
      * Show the form for editing the specified resource.
      *
@@ -91,9 +82,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $category = Category::all();
-        return view('products.edit',compact('product'),compact('category'));
+        return view('products.edit', compact('product'), compact('category'));
     }
-        /**
+      /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -121,12 +112,18 @@ class ProductController extends Controller
         $products->save();
         return redirect(route('product.index')) ;
     }
-    public function userView()
+    public function userView(Request $request)
     {
-       $products = Product::active()->get();
-         //$products = DB::table('products')->paginate(1);
-        return view('products.indexClient', compact('products'));
+        $products = Product::active()->get();
+        if ($request) {
+            $query = trim($request->get('search'));
+        
+            $products = Product::where('name', 'LIKE', '%' . $query . '%')
+                ->orderBy('id', 'asc')
+                ->paginate(2);
+            return view('products.indexClient', ['products' => $products, 'search' => $query], compact('product'));
+        }
+ 
+        return view('products.indexClient', compact('product'));
     }
-
 }
-

@@ -15,15 +15,20 @@
       <input type="text" class="form-control" name="description" value="{{$product->description}}" placeholder="escribe tu nombre">
 </div>
 <div class="form-group">
+    <label for="">Edith Category</label><br>
     <select name="category_id" id="inputCategoria:id" class=·form-control>
-
-        <option value="">{{$product->category_id}}</option>></option>
-
-        <option value="">--escoja la categoria--</option>></option>
-
-        @foreach($category as $category )
+        <option value="{{$product->category_id}}">
+    @foreach($category as $categories)
+            @if($product->category_id == $categories->id)
+                {{$categories->name}}
+                    </option>
+            @endif 
+    @endforeach
+    
+     @foreach($category as $category )
         <option value="{{$category->id}}"> {{$category->name}} </option>
     @endforeach
+    
     </select>
 </div>
 <div class="form-group">
