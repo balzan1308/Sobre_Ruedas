@@ -39,10 +39,5 @@ class Product extends Model
     {
         return $query->where('active', 1);
     }
-    public function userView()
-    {
-        $products = Product::active()->get();
-         //$products = DB::table('products')->paginate(1);
-        return view('products.indexClient', compact('products'));
-    }
+
 }

@@ -3,8 +3,7 @@
 @section('content')
 <table class="table">
   <div class="container">
-    <h2>Lista de usuario registrados <br> <a href="product/create"><button type="button" class="btn btn-success">registrar nuevo Producto</button></a></h2>
-
+    <h2>products<br> <a href="product/create"><button type="button" class="btn btn-primary">new product</button></a></h2>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -24,8 +23,8 @@
            <td>{{$product->price}}</td>
            <td>{{$product->stock}}</td>
            <td>
-           <a href="{{ route('product.edit', $product->id) }}"><button type="button" class="btn btn-primary">Editar</button></a>
-           <a href="{{route('product.show', $product->id) }}"><button type="button" class="btn btn-secondary">Ver</button></a>
+           <a href="{{ route('product.edit', $product->id) }}"><button type="button" class="btn btn-primary">edit</button></a>
+           <a href="{{route('product.show', $product->id) }}"><button type="button" class="btn btn-secondary">show</button></a>
            </td>
           </tr>
         @endforeach

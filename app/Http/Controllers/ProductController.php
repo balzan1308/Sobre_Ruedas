@@ -9,6 +9,12 @@ use App\Category;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+        $this->middleware('active');
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,11 +44,11 @@ class ProductController extends Controller
         return view('products.create', compact('category'));
     }
     /**
-      * Store a newly created resource in storage.
-      *
-      * @param  \Illuminate\Http\Request  $request
-      * @return \Illuminate\Http\Response
-      */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         if ($request->hasFile('image') )
@@ -111,19 +117,5 @@ class ProductController extends Controller
         $products->active = (!request()->has('active') == '1' ? '0' : '1');
         $products->save();
         return redirect(route('product.index')) ;
-    }
-    public function userView(Request $request)
-    {
-        $products = Product::active()->get();
-        if ($request) {
-            $query = trim($request->get('search'));
-        
-            $products = Product::where('name', 'LIKE', '%' . $query . '%')
-                ->orderBy('id', 'asc')
-                ->paginate(2);
-            return view('products.indexClient', ['products' => $products, 'search' => $query], compact('product'));
-        }
- 
-        return view('products.indexClient', compact('product'));
     }
 }

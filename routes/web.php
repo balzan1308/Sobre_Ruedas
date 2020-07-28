@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 Route::resource('users','UserController');
 Route::resource('product', 'ProductController');
-Route::get('products/indexClient', 'ClientController@index')->name('products/indexClient');
-Route::get('vitrina/indexClient', 'ClientController@vitrina')->name('vitrina/indexClient');
+Route::get('/', 'ClientController@index')->name('products/indexClient');
+Route::get('/products/{product}', 'ClientController@show')->name('products/show');
+
+
 

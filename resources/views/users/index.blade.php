@@ -3,7 +3,7 @@
 @section('content')
 <table class="table">
   <div class="container">
-   <h2>Lista de usuario registrados <br> <a href="users/create"><button type="button" class="btn btn-success">registrar nuevo usuario</button></a></h2>
+   <h2>users <br> <a href="users/create"><button type="button" class="btn btn-primary">new user</button></a></h2>
 
    <table class="table table-hover">
     <thead>
@@ -24,8 +24,8 @@
          <td>{{$user->last_name}}</td>
          <td>{{$user->email}}</td>
          <td>
-           <a href="{{route('users.show', $user->id) }}"><button type="button" class="btn btn-secondary">Ver</button></a>
-           <a href="{{ route('users.edit', $user->id) }}"><button type="button" class="btn btn-primary">Editar</button></a>
+          <a href="{{ route('users.edit', $user->id) }}"><button type="button" class="btn btn-primary">edit</button></a>
+           <a href="{{route('users.show', $user->id) }}"><button type="button" class="btn btn-secondary">show</button></a>
            </td>
         </tr>
       @endforeach
