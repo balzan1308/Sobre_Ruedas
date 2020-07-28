@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use Illuminate\Support\Facades\Cache;
 
 
 class ProductController extends Controller
@@ -40,7 +41,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $category = Category::all();
+        $category = Cache::rememberforever(
+            'categories', function () {
+                return Category::all();
+            
+        });
+        
         return view('products.create', compact('category'));
     }
     /**
