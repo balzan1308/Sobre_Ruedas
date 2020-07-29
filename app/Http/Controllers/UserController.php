@@ -6,28 +6,27 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
+
+
 class UserController extends Controller
+
 {
+        
     public function __construct()
     {
-        $this->middleware('verified');
-        $this->middleware('active');
+      $this->middleware('verified');
+      $this->middleware('active');
     }
+    
 
-    public function index(Request $request)
+   
+    public function index()
     {
-        if ($request) {
-            $query = trim($request->get('search'));
-            
-            $users = user::where('email', 'LIKE', '%' . $query . '%')
-                    ->orderBy('id', 'asc')
-                    ->paginate(2);
-            return view('users.index', ['users' => $users, 'search' => $query], compact('user'));
-        }
-        return view('users.index', compact('user'));
+        $users=User::all();
+        return view('users.index',['users'=>$users]);
     }
     public function show($id)
-    {
+    {   
         $user=User::find($id);
         return view('users.show', compact('user'));
     }
@@ -38,7 +37,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+       return view('users.create');
+       
     }
     public function store(Request $request)
     {
@@ -62,4 +62,9 @@ class UserController extends Controller
 
         return redirect('users') ;
     }
+
+   
+
+
 }
+
