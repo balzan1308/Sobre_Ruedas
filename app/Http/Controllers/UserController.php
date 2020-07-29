@@ -12,6 +12,7 @@ class UserController extends Controller
     {
         $this->middleware('verified');
         $this->middleware('active');
+        
     }
 
     public function index(Request $request)

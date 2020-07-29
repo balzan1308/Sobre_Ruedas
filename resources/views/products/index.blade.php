@@ -3,6 +3,11 @@
 @section('content')
 <table class="table">
   <div class="container">
+    <form class="form-inline" action="{{route('product.index')}}" metohd="GET">
+      <i class="fas fa-search" aria-hidden="true"></i>
+        <label for="name" >Nombre</label>
+      <input class="form-control form-control-sm ml-3 w-75" id="name" type="text" placeholder="Search" name="filter[name]" aria-label="Search">
+    </form>
     <h2>products<br> <a href="product/create"><button type="button" class="btn btn-primary">new product</button></a></h2>
       <table class="table table-hover">
         <thead>

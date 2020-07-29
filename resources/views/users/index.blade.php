@@ -3,8 +3,12 @@
 @section('content')
 <table class="table">
   <div class="container">
+    <form class="form-inline" action="{{route('users.index')}}" metohd="GET">
+      <i class="fas fa-search" aria-hidden="true"></i>
+        <label for="email" >Nombre</label>
+      <input class="form-control form-control-sm ml-3 w-75" name="search" type="text" placeholder="Search" name="filter[name]" aria-label="Search">
+    </form>
    <h2>users <br> <a href="users/create"><button type="button" class="btn btn-primary">new user</button></a></h2>
-
    <table class="table table-hover">
     <thead>
       <tr>

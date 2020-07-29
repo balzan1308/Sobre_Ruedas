@@ -7,7 +7,6 @@ use App\Product;
 use App\Category;
 use Illuminate\Support\Facades\Cache;
 
-
 class ProductController extends Controller
 {
     public function __construct()
@@ -23,16 +22,9 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request) {
-            $query = trim($request->get('search'));
-            
-            $products = Product::where('name', 'LIKE', '%' . $query . '%')
-                    ->orderBy('id', 'asc')
-                    ->paginate(2);
-            return view('products.index', ['products' => $products, 'search' => $query], compact('product'));
-        }
-     
-        return view('products.index', compact('product'));
+     $products = Product::name($request->input('filter.name'))->paginate(2);
+
+     return view('products.index', compact('products'));
     }
     /**
      * Show the form for creating a new resource.
@@ -41,7 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $category = Cache::rememberforever(
+        $category = Cache::remember(
             'categories', function () {
                 return Category::all();
             
