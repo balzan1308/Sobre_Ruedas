@@ -11,7 +11,7 @@
                     <div class="card-body">
                     <p>Nombre: {{$user->name .' ' . $user->last_name}}</p>
                     <p>Correo electrónico: {{$user->email}}</p>
-                    <p>Estado: {{ $user->estado == 1  ? "habilitado" :"deshabilitado"}}</p>
+                    <p>Estado: {{ $user->estado == 1  ? "disable" :"enable"}}</p>
                     <a href="{{route('users.index')}}"><button type="button" class="btn btn-outline-danger">cancelar</button>
                     </a>
                 </div>
