@@ -3,6 +3,7 @@
 @section('content')
 <table class="table">
   <div class="container">
+    <h2>categories<br> <a href="categories/create"><button type="button" class="btn btn-primary">new categorie</button></a></h2>
     
       <table class="table table-hover">
         <thead>
