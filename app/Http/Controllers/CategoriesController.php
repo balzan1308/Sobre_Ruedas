@@ -17,6 +17,10 @@ class CategoriesController extends Controller
         $categories=category::all();
         return view('categories.index',['categories'=>$categories]);
     }
+    public function edit(Category $category)
+    {
+        return view('categories.edit', compact('category'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -33,6 +37,24 @@ class CategoriesController extends Controller
             $category->slug =request('slug');
             $category->description =request('description');
             $category->save();
+
+        return redirect('categories');
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(request $request, $id)
+    {
+
+        $category=category::find($id);
+            $category->name =request('name');
+            $category->slug =request('slug');
+            $category->description =request('description');
+            $category->update();
 
         return redirect('categories');
     }

@@ -30,16 +30,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div id="app">
         <div class="wrapper">
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                  <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-            </form>
+            
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
@@ -125,6 +116,23 @@
                                                  Products
                                                  <?php use App\Product; $products_count = product::all()->count(); ?>
                                                  <span class="right badge badge-danger">{{ $products_count ?? '0' }}</span>
+                                             </p>
+                                        </a>
+                                     </li>
+                                    </li>
+                                   
+                                </ul>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        
+                                     <li class="nav-item">
+                                         <a href="{{url ('categories')}}"
+                                                class="{{ Request::path() === 'category' ? 'nav-link active' : 'nav-link' }}">
+                                                <img src="https://img.icons8.com/material-outlined/24/000000/product.png"/>
+                                             <p>
+                                                 categories
+                                                 <?php use App\category; $categories_count = category::all()->count(); ?>
+                                                 <span class="right badge badge-danger">{{ $categories_count ?? '0' }}</span>
                                              </p>
                                         </a>
                                      </li>
