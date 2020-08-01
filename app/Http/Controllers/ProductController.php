@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\Product;
 use App\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
@@ -16,33 +18,34 @@ class ProductController extends Controller
         
     }
     /**
-     * Display a listing of the resource.
+     * Undocumented function
      *
-     * @return \Illuminate\View\View
+     * @param Request $request
+     * @return View
      */
-    public function index(Request $request):\Illuminate\View\View
+    public function index(Request $request): View
     {
      $products = Product::name($request->input('filter.name'))->paginate(2);
 
      return view('products.index', compact('products'));
     }
     /**
-     * Show the form for creating a new resource.
+     * Undocumented function
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $category = Category::all();
         return view('products.create', compact('category'));
     }
     /**
-     * Store a newly created resource in storage.
+     * Undocumented function
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         if ($request->hasFile('image') )
         {
@@ -60,37 +63,37 @@ class ProductController extends Controller
           $product->save();
           return redirect('/product');
     }
-      /**
-     * Display the specified resource.
+    /**
+     * Undocumented function
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param [type] $id
+     * @return View
      */
-    public function show($id)
+    public function show($id): View
     {
         $category =Category::find($id);
         $product=Product::find($id);
         return view('products.show', compact('product'), compact('category'));
     }
-      /**
-     * Show the form for editing the specified resource.
+    /**
+     * Undocumented function
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param Product $product
+     * @return View
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         $category = Category::all();
         return view('products.edit', compact('product'), compact('category'));
     }
-      /**
-     * Update the specified resource in storage.
+    /**
+     * Undocumented function
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param request $request
+     * @param [type] $id
+     * @return void
      */
-    public function update(request $request, $id)
+    public function update(request $request, $id): RedirectResponse
     {
 
         $products = Product::find($id);

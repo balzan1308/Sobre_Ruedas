@@ -10,9 +10,10 @@ use App\Category;
 class ClientController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Undocumented function
      *
-     * @return \Illuminate\View\View
+     * @param request $request
+     * @return View
      */
     public function index(request $request): View
     {
@@ -22,11 +23,11 @@ class ClientController extends Controller
         ->paginate(4);
         return view('store.index', compact('products'));
     }
-       /**
-     * Display the specified resource.
+    /**
+     * Undocumented function
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param [type] $id
+     * @return View
      */
     public function show($id): View
     {

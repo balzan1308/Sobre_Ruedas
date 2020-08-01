@@ -2,45 +2,48 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\Category;
+use Illuminate\Http\RedirectResponse;
 
 class CategoriesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Undocumented function
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index():\Illuminate\View\View
+    public function index(): View
     {
         $categories=category::all();
         return view('categories.index',['categories'=>$categories]);     
     }
-     /**
-     * Show the form for editing the specified resource.
+    /**
+     * Undocumented function
      *
-     * @return \Illuminate\View\View
+     * @param Category $category
+     * @return View
      */
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         return view('categories.edit', compact('category'));
     }
     /**
-     * Show the form for creating a new resource.
+     * Undocumented function
      *
-     * @return \Illuminate\View\View
+     * @return view
      */
-    public function create()
+    public function create(): view
     {
         return view('categories.create');
     }
     /**
-     * Store a newly created resource in storage.
+     * Undocumented function
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
             $category= new category();
             $category->name =request('name');
@@ -51,13 +54,13 @@ class CategoriesController extends Controller
         return redirect('categories');
     }
     /**
-     * Update the specified resource in storage.
+     * Undocumented function
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Routing\Redirector
+     * @param request $request
+     * @param [type] $id
+     * @return void
      */
-    public function update(request $request, $id)
+    public function update(request $request, $id): RedirectResponse
     {
 
         $category=category::find($id);
@@ -70,3 +73,4 @@ class CategoriesController extends Controller
     }
     
 }
+
