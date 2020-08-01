@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use phpDocumentor\Reflection\Types\Void_;
+
 
 class UserStatus
 {
@@ -15,7 +15,7 @@ class UserStatus
      * @param Closure $next
      * @return void
      */
-    public function handle($request, Closure $next): Void_
+    public function handle($request, Closure $next)
     {
         
         $user = Auth::user();
