@@ -20,7 +20,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request):\Illuminate\View\View
     {
      $products = Product::name($request->input('filter.name'))->paginate(2);
 

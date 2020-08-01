@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\Product;
 use App\Category;
 
 class ClientController extends Controller
 {
     /**
-     *
+     * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
      */
-    public function index(request $request):\Illuminate\View\View
+    public function index(request $request): View
     {
         $Category = Category::all();
         $products = Product::active()
@@ -27,7 +28,7 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show($id): View
     {
         $category =Category::find($id);
         $product=Product::find($id);

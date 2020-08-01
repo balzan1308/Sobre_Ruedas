@@ -11,7 +11,7 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index():\Illuminate\View\View
     {
         $categories=category::all();
         return view('categories.index',['categories'=>$categories]);     
