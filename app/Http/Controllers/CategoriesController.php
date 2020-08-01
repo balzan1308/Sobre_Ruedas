@@ -9,13 +9,18 @@ class CategoriesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
         $categories=category::all();
         return view('categories.index',['categories'=>$categories]);     
     }
+     /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\View\View
+     */
     public function edit(Category $category)
     {
         return view('categories.edit', compact('category'));
@@ -23,12 +28,18 @@ class CategoriesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
         return view('categories.create');
     }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
             $category= new category();
@@ -44,7 +55,7 @@ class CategoriesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Routing\Redirector
      */
     public function update(request $request, $id)
     {

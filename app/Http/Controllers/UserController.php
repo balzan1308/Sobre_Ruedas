@@ -14,7 +14,11 @@ class UserController extends Controller
         $this->middleware('active');
         
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index(Request $request)
     {
         if ($request) {
@@ -27,20 +31,41 @@ class UserController extends Controller
         }
         return view('users.index', compact('user'));
     }
+       /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
     public function show($id)
     {
         $user=User::find($id);
         return view('users.show', compact('user'));
     }
+     /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\View\View
+     */
     public function edit(USer $user)
     {
         return view('users.edit', compact('user'));
     }
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         return view('users.create');
     }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
             $user= new User();
@@ -52,6 +77,13 @@ class UserController extends Controller
 
         return redirect('users') ;
     }
+      /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         $user = User::find($id);

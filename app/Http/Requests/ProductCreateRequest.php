@@ -27,8 +27,6 @@ class ProductCreateRequest extends FormRequest
             'description'=> 'required|alpha',
             'image' => 'required',
             'price' => 'required',
-
-
         ];
     }
 }
