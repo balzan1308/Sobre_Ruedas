@@ -25,10 +25,7 @@
            <td>{{$category->description}}</td>
            <td>
             <a href="{{ route('categories.edit', $category->id) }}"><button type="button" class="btn btn-primary">edit</button></a>
-            
-            </td>
-           
-           
+           </td>
           </tr>
         @endforeach
       </tbody>

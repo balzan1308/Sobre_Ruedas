@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -43,7 +42,8 @@
 						<div class="info">
 							<a href="#" class="d-block">
 								@guest
-								<a class="nav-link" href="{{ route('login') }}"><h4>Login</h4></a>
+								<li><a class="nav-link" href="{{ route('login') }}"><h4>Login</h4></a></li>
+								<li><a class="nav-link" href="{{ route('register') }}"><h4>register</h4></a></li>
 								@else
 								<h4>{{ Auth::user()->name }}</h4>
 								<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -197,23 +197,21 @@
 		</nav>
 	    <div class="section">
             <div class="card-columns">
-                @foreach($products as $product )
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-5 col-xs-6">
+				<div class="row">
+                 @foreach($products as $product )
+                            <div class="col-md-6 col-xs-5">
                                 <div class="card disabled"  aria-disabled="true"  style="width:50%">
                                     <div class="card-body">
                                       <img class="card-img-top" src="../../../images/{{ $product->image }}" alt="Card image" style="width:100%">
                                         <div class="card body">
-                                          <h4 class="card-title">{{$product->name }}</h4>
+                                          <h3 class="card-title">{{$product->name }}</h3>
 										   <a href="{{ route('products/show', $product->id) }}" class="btn btn-primary ">detalles</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-					</div>
-			    @endforeach 
+					@endforeach
+				</div>  
             </div>
         </div>
         <div class="">

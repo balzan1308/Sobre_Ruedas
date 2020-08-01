@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
-use App\category;
+use App\Category;
 
 class ClientController extends Controller
 {
@@ -15,11 +15,11 @@ class ClientController extends Controller
      */
     public function index(request $request):\Illuminate\View\View
     {
-        $category = Category::all();
+        $Category = Category::all();
         $products = Product::active()
         ->name($request->input('filter.name'))
-        ->paginate(3);
-        return view('store.index', compact('products'), compact('category'));
+        ->paginate(4);
+        return view('store.index', compact('products'));
     }
        /**
      * Display the specified resource.

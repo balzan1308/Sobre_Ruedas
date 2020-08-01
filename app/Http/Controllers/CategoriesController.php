@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Category;
 
@@ -15,7 +14,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories=category::all();
-        return view('categories.index',['categories'=>$categories]);
+        return view('categories.index',['categories'=>$categories]);     
     }
     public function edit(Category $category)
     {
@@ -58,4 +57,5 @@ class CategoriesController extends Controller
 
         return redirect('categories');
     }
+    
 }
