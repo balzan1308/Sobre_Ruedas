@@ -23,7 +23,7 @@ class UserController extends Controller
             $users = user::where('email', 'LIKE', '%' . $query . '%')
                     ->orderBy('id', 'asc')
                     ->paginate(2);
-            return view('users.index', ['users' => $users, 'search' => $query], compact('user'));
+            return view('users.index', ['users' => $users, 'search' => $query]);
         }
         return view('users.index', compact('user'));
     }

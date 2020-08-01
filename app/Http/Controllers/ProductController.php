@@ -33,12 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $category = Cache::remember(
-            'categories', function () {
-                return Category::all();
-            
-        });
-        
+        $category = Category::all();
         return view('products.create', compact('category'));
     }
     /**
@@ -95,7 +90,6 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function update(request $request, $id)
     {
 

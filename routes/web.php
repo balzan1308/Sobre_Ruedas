@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 Route::resource('users','UserController');
 Route::resource('product', 'ProductController');
+Route::resource('categories','CategoriesController');
 Route::get('/', 'ClientController@index')->name('products/indexClient');
 Route::get('/products/{product}', 'ClientController@show')->name('products/show');
 

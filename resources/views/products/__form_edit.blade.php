@@ -33,11 +33,14 @@
 </div>
 <div class="form-group">
 
-    <label for="" >Imagen</label>
+    <label for="" >image</label>
     <input type="file" name="image" class="form-control" value="{{$product->image}}">
    
-
 </div>
+<p>
+    <label for="" >current image</label>
+    <img src="../../../images/{{$product->image}}" width="200" alt="">
+</p>
 <div class="custom-control custom-checkbox">
        <input type="checkbox" class="custom-control-input" 
         value="{{$product->active == 1 ?  1 : 0}}" 

@@ -36,8 +36,28 @@
 						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="welcome"><i class="fa fa-user-o"></i> My Account</a></li>
+					
+						<div class="info">
+							<a href="#" class="d-block">
+								@guest
+								<li><a class="nav-link" href="{{ route('login') }}"><h4>Login</h4></a></li>
+								<li><a class="nav-link" href="{{ route('register') }}"><h4>register</h4></a></li>
+								@else
+								<h4>{{ Auth::user()->name }}</h4>
+								<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+							    		   document.getElementById('logout-form').submit();">
+									<h4>Cerrar Sesión</h4>
+								</a>
+	
+								<form id="logout-form" action="{{ route('logout') }}" method="POST"
+									style="display: none;">
+									@csrf
+								</form>
+	
+									@endguest
+								</a>
+							</div>
+						
 					</ul>
 				</div>
 			</div>
@@ -193,7 +213,7 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">{{$product->name}}</h2>
+							<h3 class="product-name">{{$product->name}}</h3>
 							<div>
 								<h3 class="product-price">{{$product->price}} </h3>
 								<span class="product-available">In Stock {{$product->stock}}</span>
