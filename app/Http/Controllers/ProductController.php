@@ -25,7 +25,8 @@ class ProductController extends Controller
      */
     public function index(Request $request): View
     {
-     $products = Product::name($request->input('filter.name'))->paginate(2);
+     $products = Product::name($request->input('filter.name'))
+     ->paginate(4);
 
      return view('products.index', compact('products'));
     }

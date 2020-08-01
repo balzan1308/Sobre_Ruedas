@@ -13,6 +13,7 @@
         <thead>
           <tr>
             <th scope="col">id</th>
+            <th scope="col">Category</th>
             <th scope="col">name</th>
             <th scope="col">price</th>
             <th scope="col">stock</th>
@@ -24,6 +25,7 @@
        @foreach($products as $product)
           <tr>
            <th scope="row">{{$product->id}}</th>
+           <td>{{$product->category->name}}</td>
            <td>{{$product->name}}</td>
            <td>{{$product->price}}</td>
            <td>{{$product->stock}}</td>
