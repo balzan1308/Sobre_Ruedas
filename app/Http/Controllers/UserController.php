@@ -3,44 +3,75 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 
 
-
 class UserController extends Controller
-
 {
-        
     public function __construct()
     {
-      $this->middleware('verified');
-      $this->middleware('active');
+        $this->middleware('verified');
+        $this->middleware('active');
+        
     }
-    
-
-   
-    public function index()
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request): View
     {
-        $users=User::all();
-        return view('users.index',['users'=>$users]);
+        if ($request) {
+            $query = trim($request->get('search'));
+            
+            $users = user::where('email', 'LIKE', '%' . $query . '%')
+                    ->orderBy('id', 'asc')
+                    ->paginate(2);
+            return view('users.index', ['users' => $users, 'search' => $query]);
+        }
+        return view('users.index', compact('user'));
     }
-    public function show($id)
-    {   
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return View
+     */
+    public function show($id): View
+    {
         $user=User::find($id);
         return view('users.show', compact('user'));
     }
-    public function edit(USer $user)
+    /**
+     * Undocumented function
+     *
+     * @param USer $user
+     * @return View
+     */
+    public function edit(USer $user): View
     {
         return view('users.edit', compact('user'));
     }
-
-    public function create()
+    /**
+     * Undocumented function
+     *
+     * @return View
+     */
+    public function create(): View
     {
-       return view('users.create');
-       
+        return view('users.create');
     }
-    public function store(Request $request)
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function store(Request $request): RedirectResponse
     {
             $user= new User();
             $user->name =request('name');
@@ -51,7 +82,14 @@ class UserController extends Controller
 
         return redirect('users') ;
     }
-    public function update(Request $request, $id)
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
+    public function update(Request $request, $id): RedirectResponse
     {
         $user = User::find($id);
         $user->name =$request->name;
@@ -62,9 +100,4 @@ class UserController extends Controller
 
         return redirect('users') ;
     }
-
-   
-
-
 }
-

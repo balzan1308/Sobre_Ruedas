@@ -5,18 +5,19 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+
 class UserStatus
 {
     /**
-     * Handle an incoming request.
+     * Undocumented function
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @param [type] $request
+     * @param Closure $next
+     * @return void
      */
     public function handle($request, Closure $next)
     {
-        //Este middleware verifica que el usuario esté inhabilitado en la plataforma
+        
         $user = Auth::user();
 
         if ($user != null) {

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\Product;
 use App\Category;
-
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
@@ -16,45 +18,35 @@ class ProductController extends Controller
         
     }
     /**
-     * Display a listing of the resource.
+     * Undocumented function
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        if ($request) {
-            $query = trim($request->get('search'));
-            
-            $products = Product::where('name', 'LIKE', '%' . $query . '%')
-                    ->orderBy('id', 'asc')
-                    ->paginate(2);
-            return view('products.index', ['products' => $products, 'search' => $query], compact('product'));
-        }
-     
-        return view('products.index', compact('product'));
+     $products = Product::name($request->input('filter.name'))
+     ->paginate(4);
+
+     return view('products.index', compact('products'));
     }
     /**
-     * Show the form for creating a new resource.
+     * Undocumented function
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
-        $category = Cache::remember(
-            'categories', function () {
-                return Category::all();
-            
-        });
-        
+        $category = Category::all();
         return view('products.create', compact('category'));
     }
     /**
-     * Store a newly created resource in storage.
+     * Undocumented function
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return void
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         if ($request->hasFile('image') )
         {
@@ -72,38 +64,37 @@ class ProductController extends Controller
           $product->save();
           return redirect('/product');
     }
-      /**
-     * Display the specified resource.
+    /**
+     * Undocumented function
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param [type] $id
+     * @return View
      */
-    public function show($id)
+    public function show($id): View
     {
         $category =Category::find($id);
         $product=Product::find($id);
         return view('products.show', compact('product'), compact('category'));
     }
-      /**
-     * Show the form for editing the specified resource.
+    /**
+     * Undocumented function
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return View
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         $category = Category::all();
         return view('products.edit', compact('product'), compact('category'));
     }
-      /**
-     * Update the specified resource in storage.
+    /**
+     * Undocumented function
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param request $request
+     * @param [type] $id
+     * @return void
      */
-
-    public function update(request $request, $id)
+    public function update(request $request, $id): RedirectResponse
     {
 
         $products = Product::find($id);

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -18,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name','last_name', 'email', 'password',
     ];
+    
 
     /**
      * The attributes that should be hidden for arrays.
