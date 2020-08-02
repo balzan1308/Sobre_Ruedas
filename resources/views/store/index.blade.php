@@ -85,7 +85,7 @@
 						<div class="col-md-6">
 							<div class="header-search">
 								<form class="form-inline" action="{{route('products/indexClient')}}" metohd="GET">
-                                   <input class="form-control form-control-sm ml-3 w-75" id="name" type="text" placeholder="Search" name="filter[name]" aria-label="Search">
+                                   <input class="form-control form-control-sm ml-3 w-75" id="name" type="text" placeholder="Search" name="name" aria-label="Search">
 									<button class="search-btn">Search</button>
 								</form>
 							</div>
@@ -182,12 +182,60 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="/">Home</a></li>
-						<li><a href="#">Categories-></a></li>
-						<li><a href="#">Honda</a></li>
-						<li><a href="#">Yamaha</a></li>
-						<li><a href="#">Auteco</a></li>
-						<li><a href="#">kawasaki</a></li>
+						<li class="active"><a href="/"><h3>Home</h3></a></li>
+						<li><a><h3>Categories-></h3></a></li>
+						<li><ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+								<form action="{{route('products/indexClient')}}" method="get">
+									<input type="text" name="category" id="" value="Honda" hidden>
+									<button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
+										class="{{ Request::path() === 'Honda' ? 'nav-link active' : 'nav-link' }}">
+										<h3>Honda</h3>
+									</button>
+								</form>
+								</a>
+							</li>
+						</ul></li>
+						<li><ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+								<form action="{{route('products/indexClient')}}" method="get">
+									<input type="text" name="category" id="" value="Yamaha" hidden>
+									<button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
+										class="{{ Request::path() === 'Yamaha' ? 'nav-link active' : 'nav-link' }}">
+										<h3>Yamaha</h3>
+									</button>
+								</form>
+								</a>
+							</li>
+						</ul></li>
+						<li><ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+								<form action="{{route('products/indexClient')}}" method="get">
+									<input type="text" name="category" id="" value="Auteco" hidden>
+									<button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
+										class="{{ Request::path() === 'Auteco' ? 'nav-link active' : 'nav-link' }}">
+										<h3>Auteco</h3>
+									</button>
+								</form>
+								</a>
+							</li>
+						</ul></li>
+						<li><ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+								<form action="{{route('products/indexClient')}}" method="get">
+									<input type="text" name="category" id="" value="Kawasaki" hidden>
+									<button type="submit"  class="btn btn-dark btn-sm btn-block text-left"
+										class="{{ Request::path() === 'Kawasaki' ? 'nav-link active' : 'nav-link' }}">
+										<h3>Kawasaki</h3>
+									</button>
+								</form>
+								</a>
+							</li>
+						</ul></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -200,9 +248,9 @@
 				<div class="row">
                  @foreach($products as $product )
                             <div class="col-md-6 col-xs-5">
-                                <div class="card disabled"  aria-disabled="true"  style="width:50%">
+                                <div class="card disabled"  aria-disabled="true"  style="width:60%">
                                     <div class="card-body">
-                                      <img class="card-img-top" src="../../../images/{{ $product->image }}" alt="Card image" style="width:100%">
+                                      <img class="card-img-top" src="../../../images/{{ $product->image }}" alt="Card image" style="width:75%">
                                         <div class="card body">
                                           <h3 class="card-title">{{$product->name }}</h3>
 										   <a href="{{ route('products/show', $product->id) }}" class="btn btn-primary ">detalles</a>

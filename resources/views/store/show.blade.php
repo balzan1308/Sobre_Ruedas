@@ -219,6 +219,7 @@
 								<span class="product-available">In Stock {{$product->stock}}</span>
 							</div>
 							<p>description: {{$product->description}}</p>
+							<p>category: {{$product->category->name}}</p>
 							<div class="add-to-cart">
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>

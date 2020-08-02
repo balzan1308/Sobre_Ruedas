@@ -9,19 +9,26 @@ use App\Category;
 
 class ClientController extends Controller
 {
-    /**
+      /**
      * Undocumented function
      *
-     * @param request $request
+     * @param Request $request
      * @return View
      */
-    public function index(request $request): View
+    public function index(Request $request) :View
     {
-        $Category = Category::all();
-        $products = Product::active()
-        ->name($request->input('filter.name'))
-        ->paginate(4);
-        return view('store.index', compact('products'));
+        $category = $request->get('category', null);
+        $name = $request->get('name', null);
+
+        $this->products = new product();
+
+        return view('store.index', ['products' => $this->products
+                                    ->active()
+                                    ->name($name)
+                                    ->category($category)
+                                    ->paginate(4),
+            
+            ]);
     }
     /**
      * Undocumented function

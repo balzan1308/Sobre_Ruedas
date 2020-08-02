@@ -10,14 +10,10 @@ class Product extends Model
     protected $fillable = [
         'name','description', 'image','price', 'active'
     ];
-
-    
     public function category()
     {
         return $this->belongsTo('App\Category');
     }
-
-   
     public function stock()
     {
         return $this->hasOne('App\Stock');
@@ -39,5 +35,23 @@ class Product extends Model
     {
         return $query->where('active', 1);
     }
+    /**
+     * Undocumented function
+     *
+     * @param [type] $query
+     * @param [type] $category
+     * @return void
+     */
+    public function scopeCategory($query, $category)
+    {
+        if (empty($category)) {
+            return;
+        }
+
+        return  $query->whereHas('category', function ($query) use ($category) {
+            $query->where('name', $category);
+        });
+    }
+    
 
 }
