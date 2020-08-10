@@ -25,6 +25,5 @@ Route::resource('product', 'ProductController');
 Route::resource('categories','CategoriesController');
 Route::get('/', 'ClientController@index')->name('products/indexClient');
 Route::get('/products/{product}', 'ClientController@show')->name('products/show');
-
-
-
+Route::get('/cart', 'CartController@index')->name('cart/index');
+Route::get('add-to-cart/{id}', 'CartController@addtoCart')->name('cart/product');
