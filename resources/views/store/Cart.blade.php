@@ -19,7 +19,7 @@
             <tbody>
                 @forelse ($cart as $item)
                  <tr>
-                 <td><img src="images/{{ $item->image }}" style="width:25%"> </td>
+                 <td><img src="images/{{ $item->image }}" style="width:30"height="30" > </td>
                  <td>{{$item->name}}</td>
                  <td>{{number_format ($item->price)}}</td>
                  <td>{{$item->quantity}}</td>

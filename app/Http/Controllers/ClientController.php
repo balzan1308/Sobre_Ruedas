@@ -32,7 +32,7 @@ class ClientController extends Controller
             
             ]);
     }
-  /**
+     /**
      * Undocumented function
      *
      * @param [type] $id
@@ -40,9 +40,10 @@ class ClientController extends Controller
      */
     public function show($id): View
     {
+        $cart = \Session::get('cart');
         $category =Category::find($id);
         $product=Product::find($id);
-        return view('store.show', compact('product'), compact('category'));
+        return view('store.show',compact('cart'), compact('product'), compact('category'));
     }
     
 }

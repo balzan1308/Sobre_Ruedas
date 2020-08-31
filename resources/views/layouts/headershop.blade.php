@@ -101,13 +101,13 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 							<i class="fa fa-shopping-cart"></i>
 							<span>Your Cart</span>
-							<div class="qty">3</div>
+							
 						</a>
 						<div class="cart-dropdown">
 							<div class="cart-list">
 								<div class="product-widget">
 								   <div class="product-body">
-									@foreach ($cart as $item)
+									@forelse ($cart as $item)
 									<tr>
 									
 										 <img src="images/{{ $item->image }}" style="width:30%">
@@ -120,7 +120,9 @@
 										 </a>
 										
 									</tr>
-										@endforeach
+									@empty
+									<h3>tu carrito esta vacio</h3>
+								   @endforelse
 								   </div> 
 								</div>
 							</div>
