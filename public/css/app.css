@@ -1,5 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+/* carrito ------------------*/
+
+.table-cart {
+  background: #fff;
+  border-radius: 1em;
+  margin-bottom: 30px;
+  padding: 1em;
+}
+
+.table-cart img {
+  width: 50px;
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -10934,5 +10947,18 @@ h2 {
 
 h4 {
   color: white;
+}
+
+/* carrito ------------------*/
+
+.table-cart {
+  background: #fff;
+  border-radius: 1em;
+  margin-bottom: 30px;
+  padding: 1em;
+}
+
+.table-cart img {
+  width: 50px;
 }
 

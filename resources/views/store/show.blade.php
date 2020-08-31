@@ -26,10 +26,10 @@
 					</div>
 					<p>description: {{$product->description}}</p>
 					<p>category: {{$product->category->name}}</p>
-					<div class="add-to-cart">
-						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+		
+				</div><div class="add-to-cart">
+						<a href="{{ route('cart/show', $product->id) }}">  <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> ADD TO CAR</button></a>
 					</div>
-				</div>
 			</div>
 			
 		</div>

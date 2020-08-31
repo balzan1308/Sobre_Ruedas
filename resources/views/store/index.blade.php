@@ -1,4 +1,5 @@
 @include('layouts.headershop')
+<div class="container text-center">
 <div class="card-columns">
 	<div class="row">
         @foreach($products as $product )
@@ -10,7 +11,7 @@
 								<div class="add-to-cart">
                                     <h3 class="card-title">{{$product->name }}</h3>
 								     <a href="{{ route('products/show', $product->id) }}">  <button class="add-to-cart-btn"><i class=""></i> detalles</button></a>
-									 <a href="{{ route('cart/product', $product->id) }}">  <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> ADD TO CAR</button></a>
+									 <a href="{{ route('cart/show', $product->name) }}">  <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> ADD TO CAR</button></a>
 								</div>
 									
                          </div>
@@ -19,6 +20,7 @@
             </div>
 		@endforeach
 	</div>  
+</div>
 </div>
 <div class="">
 {{ $products->links() }}

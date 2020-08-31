@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->bigInteger('category_id')->unsigned();
             $table->string('image');
-            $table->string('price',20);
+            $table->decimal('price',20);
             $table->string('stock');
             $table->boolean('active')->default(true);
             $table->text('description')->nullable();

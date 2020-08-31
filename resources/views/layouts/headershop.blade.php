@@ -95,15 +95,7 @@
 			  <!-- ACCOUNT -->
 			 <div class="col-md-3 clearfix">
 				<div class="header-ctn">
-					<!-- Wishlist -->
-					<div>
-						<a href="#">
-							<i class="fa fa-heart-o"></i>
-							<span>Your Wishlist</span>
-							<div class="qty">2</div>
-						</a>
-					</div>
-					<!-- /Wishlist -->
+					
 
 					<div class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -114,33 +106,26 @@
 						<div class="cart-dropdown">
 							<div class="cart-list">
 								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product01.png" alt="">
-									</div>
-									<div class="product-body">
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-									</div>
-									<button class="delete"><i class="fa fa-close"></i></button>
+								   <div class="product-body">
+									@foreach ($cart as $item)
+									<tr>
+									
+										 <img src="images/{{ $item->image }}" style="width:30%">
+									     <h3 class="product-name">{{$item->name}}</h3>
+										 <h4 class="product-price">${{number_format ($item->price)}}</h4>
+										 <h4 class="product-price">Product {{$item->quantity}}</h4>
+										 <h4 class="product-price"></span>price total {{number_format ($item->price * $item->quantity)}}</h4>
+										 <a href="{{ route('cart/delete', $item->name)}}" class="btn btn-danger">
+											<i class="fa fa-remove"></i>
+										 </a>
+										
+									</tr>
+										@endforeach
+								   </div> 
 								</div>
-
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="./img/product02.png" alt="">
-									</div>
-									<div class="product-body">
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-									</div>
-									<button class="delete"><i class="fa fa-close"></i></button>
-								</div>
-							</div>
-							<div class="cart-summary">
-								<small>3 Item(s) selected</small>
-								<h5>SUBTOTAL: $2940.00</h5>
 							</div>
 							<div class="cart-btns">
-								<a href="#">View Cart</a>
+							<a href="{{route('cart/index')}}">View Cart</a>
 								<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
@@ -243,3 +228,5 @@
 			</div>
 			<!-- /container -->
 		</nav>
+
+</html>
