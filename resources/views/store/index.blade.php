@@ -9,9 +9,8 @@
                         <div class="card-body">
                             <img class="card-img-top" src="../../../images/{{ $product->image }}" alt="Card image" style="width:100%" height="170">
 								<div class="add-to-cart">
-                                    <h3 class="card-title">{{$product->name }}</h3>
-								     <a href="{{ route('products/show', $product->id) }}">  <button class="add-to-cart-btn"><i class=""></i> detalles</button></a>
-									 <a href="{{ route('cart/show', $product->name) }}">  <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> ADD TO CAR</button></a>
+								     <a href="{{ route('products/show', $product->id) }}">  <button class="add-to-cart-btn"><i class=""></i> {{$product->name }}</button></a>
+									 
 								</div>
 									
                          </div>

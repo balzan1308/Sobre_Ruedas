@@ -2,36 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use App\product;
+use App\Http\Controllers\Controller;
+use App\Product;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
+
 class CartController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
-        if(!\Session::has('cart')) \Session::put ('cart', array());
+        $this->middleware([
+            'auth',
+        ]);
     }
 
-    public function show()
+    /**
+     * Add a product to the Customer Cart
+     * @param Product $product
+     * @throws \Exception
+     */
+    public function add(Product $product)
     {
-       $cart = \Session::get('cart');
-       return view('store.Cart', compact('cart'));
+        \Cart::session(auth()->id())->add(array(
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'quantity' => request('quantity'),
+            'attributes' => array(),
+            'associatedModel' => Product::class
+        ));
+
+        return redirect()->route('cart.index')
+            ->with('status', 'Tu producto ha sido agregado');
     }
 
-    public function add(product  $product)
+    /**
+     * Show the cart products
+     */
+    public function index()
     {
-        $cart = \Session::get('cart');
-        $product->quantity = 1;
-        $cart[$product->name]= $product;
-        \Session::put('cart', $cart);
 
-        return redirect()->route('products/indexClient');
+        $cartProducts = \Cart::session(auth()->id())->getContent();
+
+        return view('cart.index', compact('cartProducts'));
     }
-    public function delete(product $product)
-    {
-        $cart= \Session::get ('cart');
-        unset($cart[$product->name]);
-        \Session::put('cart', $cart);
 
-        return redirect()->route('products/indexClient');
+    /**
+     * Delete the specific cart product
+     * @param $productId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($productId)
+    {
+
+        \Cart::session(auth()->id())->remove($productId);
+
+        return back()->with('status', 'Tu producto ha sido eliminado');
+    }
+
+    /**
+     * @param $productId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update($productId)
+    {
+
+        \Cart::session(auth()->id())->update($productId, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => request('quantity')
+            ),
+        ));
+
+        return back();
     }
 }

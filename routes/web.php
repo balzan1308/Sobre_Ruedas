@@ -16,18 +16,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::bind('product', function ($name) {
-    return App\Product::where('name', $name)->first();
-});
-
-
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
 Route::resource('users','UserController');
+
 Route::resource('product', 'ProductController');
+
 Route::resource('categories','CategoriesController');
+
 Route::get('/', 'ClientController@index')->name('products/indexClient');
 Route::get('/products/{id}', 'ClientController@show')->name('products/show');
-Route::get('/cart', 'CartController@show')->name('cart/index')->middleware('auth');
-Route::get('/cart/add/{product}', 'CartController@add')->name('cart/show')->middleware('auth');
-Route::get('/cart/delete/{product}','CartController@delete')->name('cart/delete');
+
+Route::get('add-to-cart/{product}', 'CartController@add')->name('cart.add');
+Route::get('/cart','CartController@index')->name('cart.index');
+Route::get('/cart/destroy/{product}','CartController@destroy')->name('cart.destroy');
+Route::get('/cart/update/{product}','CartController@update')->name('cart.update');
+

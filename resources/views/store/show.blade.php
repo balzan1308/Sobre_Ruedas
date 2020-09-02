@@ -26,9 +26,19 @@
 					</div>
 					<p>description: {{$product->description}}</p>
 					<p>category: {{$product->category->name}}</p>
-		            <div class="add-to-cart">
-						 <a href="{{ route('cart/show', $product->name) }}">  <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> ADD TO CAR</button></a>
-					</div>
+		            
+					<div class="add-to-cart">
+						
+						<form action="{{ route('cart.add', $product->id) }}">
+						   <div>
+							   <h3>Cantidad:</h3>
+							   <input name="quantity" type="text" class="input-small" value="1">
+							   <button type="submit"class="add-to-cart-btn"><i></i> agregar al carrito</button>
+						   </div>
+						   
+					   </form>
+				   </div>
+				</div>
 			</div>
 			
 		</div>

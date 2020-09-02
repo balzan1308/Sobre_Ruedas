@@ -104,30 +104,9 @@
 							
 						</a>
 						<div class="cart-dropdown">
-							<div class="cart-list">
-								<div class="product-widget">
-								   <div class="product-body">
-									@forelse ($cart as $item)
-									<tr>
-									
-										 <img src="images/{{ $item->image }}" style="width:30%">
-									     <h3 class="product-name">{{$item->name}}</h3>
-										 <h4 class="product-price">${{number_format ($item->price)}}</h4>
-										 <h4 class="product-price">Product {{$item->quantity}}</h4>
-										 <h4 class="product-price"></span>price total {{number_format ($item->price * $item->quantity)}}</h4>
-										 <a href="{{ route('cart/delete', $item->name)}}" class="btn btn-danger">
-											<i class="fa fa-remove"></i>
-										 </a>
-										
-									</tr>
-									@empty
-									<h3>tu carrito esta vacio</h3>
-								   @endforelse
-								   </div> 
-								</div>
-							</div>
+							
 							<div class="cart-btns">
-							<a href="{{route('cart/index')}}">View Cart</a>
+							<a href="{{route('cart.index')}}">View Cart</a>
 								<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>

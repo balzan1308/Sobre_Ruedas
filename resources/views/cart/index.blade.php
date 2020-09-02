@@ -1,34 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head> 
- <meta charset="UTF-8">
- <title>Javascript Cart</title>
- <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js?ver=1.11.2'></script>
- <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Ladda/0.9.8/ladda.min.css">
- <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
- <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/Ladda/0.9.8/spin.min.js"></script>
- <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/Ladda/0.9.8/ladda.min.js"></script>
- <script type='text/javascript' src="js/main.js"></script>
- <link rel='stylesheet' id='foundation-cdn-css'  href='https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css?ver=4.4.2' type='text/css' media='all' />
- <link rel="stylesheet" href="css/style.css">
- 
-</head>
-<body>
- 
- <div class="row">
- 
- <a class="cart-icon">
- <span id="totalItems">0</span>
- <ul class="cart"></ul>
- </a>
- 
- 
- <div class="productosWrapper large-12 columns">
- 
- </div>
- 
- </div>
- 
-</body>
-</html>
+  
+@include('layouts.headershop')
+
+
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    <section class="container text-center">">
+        <h3 class="py-3"><span>Cart Shop</span></h3>
+    </section>
+    <section class="main-content">
+        <div class="row">
+            <div class="col-md-12  ">
+                
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th> </th>
+                            <th>Imagen</th>
+                            <th>Nombre Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($cartProducts as $product)
+                        <tr>
+                            <td>
+                                <a href="{{ route('cart.destroy', $product->id) }}">Borrar</a>
+                            </td>
+                            <td><a href=""><img alt="" src=""></a></td>
+                            <td>{{ $product->name }}</td>
+                            <td>
+                                <form action="{{ route('cart.update', $product->id) }}">
+                                    <input name="quantity" type="number"  value="{{ $product->quantity }}">
+                                    <input type="submit" value="Guardar">
+                                </form>
+                            </td>
+                            <td>$ {{ $product->price }}</td>
+                            <td>$ {{ Cart::session(auth()->id())->get($product->id)->getPriceSum() }}</td>
+                        </tr>
+
+                        @empty
+                            <tr>
+                                No hay productos en su canasta aún.
+                            </tr>
+                         @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr>
+                <p class="cart-total float-right mr-5">
+                    <strong>Sub-Total</strong>:	$ {{ Cart::session(auth()->id())->getSubTotal() }}<br>
+                    <strong>IVA (19%)</strong>: $NA<br>
+                    <strong>Total</strong>: $NA<br>
+                </p>
+
+                <p class="buttons center">
+                    <a href="{{ route('products/indexClient') }}" class="btn-sm">Continuar</a>
+                    <button type="submit" id="checkout">Checkout</button>
+                </p>
+            </div>
+        </div>
+    </section>
+    @include('layouts.footershop')
