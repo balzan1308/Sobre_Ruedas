@@ -19,10 +19,10 @@
                         <thead>
                         <tr>
                             <th> </th>
-                            <th>Imagen</th>
-                            <th>Nombre Producto</th>
-                            <th>Cantidad</th>
-                            <th>Precio Unitario</th>
+                            <th>Image</th>
+                            <th>Name Product</th>
+                            <th>quantity</th>
+                            <th>price unit</th>
                             <th>Total</th>
                         </tr>
                         </thead>
@@ -46,7 +46,7 @@
 
                         @empty
                             <tr>
-                                No hay productos en su canasta aún.
+                                There are no products in your basket.
                             </tr>
                          @endforelse
                         </tbody>
@@ -61,7 +61,7 @@
                 </p>
 
                 <p class="buttons center">
-                    <a href="{{ route('products/indexClient') }}" class="btn-sm">Continuar</a>
+                    <a href="{{ route('products/indexClient') }}" class="btn-sm">Continue</a>
                     <button type="submit" id="checkout">Checkout</button>
                 </p>
             </div>
