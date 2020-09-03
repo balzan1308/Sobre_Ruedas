@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+
+use Darryldecode\Cart\CartCollection;
+
 class DBStorage {
 
 public function has($key)

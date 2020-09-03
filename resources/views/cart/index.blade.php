@@ -32,7 +32,7 @@
                             <td>
                                 <a href="{{ route('cart.destroy', $product->id) }}">Borrar</a>
                             </td>
-                            <td><a href=""><img alt="" src=""></a></td>
+                            <td><img src="images/{{ $product->image }}" style="width:25%"> </td>
                             <td>{{ $product->name }}</td>
                             <td>
                                 <form action="{{ route('cart.update', $product->id) }}">
@@ -40,8 +40,8 @@
                                     <input type="submit" value="Guardar">
                                 </form>
                             </td>
-                            <td>$ {{ $product->price }}</td>
-                            <td>$ {{ Cart::session(auth()->id())->get($product->id)->getPriceSum() }}</td>
+                            <td>$ {{number_format ($product->price)}}</td>
+                            <td>$ {{number_format (Cart::session(auth()->id())->get($product->id)->getPriceSum())}}</td>
                         </tr>
 
                         @empty

@@ -49,7 +49,7 @@
 								<h4>{{ Auth::user()->name }}</h4>
 								<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
 							    		   document.getElementById('logout-form').submit();">
-									<h4>Cerrar Sesión</h4>
+									<h4>Logout</h4>
 								</a>
 	
 								<form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -104,6 +104,28 @@
 							
 						</a>
 						<div class="cart-dropdown">
+							<div class="cart-list">
+								@forelse($cartProducts as $product)
+								<div class="product-widget">
+									<div class="product-img">
+										<img src="../../../images/{{ $product->image }}">
+									</div>
+									<div class="product-body">
+										<div class="product-name"><a href="{{ route('products/show', $product->id) }}"><h3>{{ $product->name }}</h3></a></div> 
+										<h4 class="product-price" class="qty">Units {{ $product->quantity }} <br> price $ {{ $product->price }}</h4>
+										<h4 class="product-price">Total $ {{ Cart::session(auth()->id())->get($product->id)->getPriceSum() }}</h4>
+
+									</div>
+									<a href="{{ route('cart.destroy', $product->id) }}"><button class="delete"><i class="fa fa-close"></i></button></a>
+								</div>
+								@empty
+								<tr>
+									No hay productos en su canasta aún.
+								</tr>
+							    @endforelse
+
+								
+							</div>
 							
 							<div class="cart-btns">
 							<a href="{{route('cart.index')}}">View Cart</a>

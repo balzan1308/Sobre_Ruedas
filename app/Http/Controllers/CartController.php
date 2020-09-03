@@ -37,7 +37,7 @@ class CartController extends Controller
             'associatedModel' => Product::class
         ));
 
-        return redirect()->route('cart.index')
+        return redirect()->route('products/indexClient')
             ->with('status', 'Tu producto ha sido agregado');
     }
 

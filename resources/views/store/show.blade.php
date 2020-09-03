@@ -21,19 +21,19 @@
 				<div class="product-details">
 					<h3 class="product-name">{{$product->name}}</h3>
 					<div>
-						<h3 class="product-price">{{$product->price}} </h3>
-						<span class="product-available">In Stock {{$product->stock}}</span>
+						<h3 class="product-price">{{number_format ($product->price)}} </h3>
+					
 					</div>
-					<p>description: {{$product->description}}</p>
-					<p>category: {{$product->category->name}}</p>
+					<h3>description: {{$product->description}}</h3>
+					<h3>category: {{$product->category->name}}</h3>
 		            
 					<div class="add-to-cart">
 						
 						<form action="{{ route('cart.add', $product->id) }}">
 						   <div>
-							   <h3>Cantidad:</h3>
+							   <h3>units:</h3>
 							   <input name="quantity" type="text" class="input-small" value="1">
-							   <button type="submit"class="add-to-cart-btn"><i></i> agregar al carrito</button>
+							   <button type="submit"class="add-to-cart-btn">agregar al carrito</button>
 						   </div>
 						   
 					   </form>
